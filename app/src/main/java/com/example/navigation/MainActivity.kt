@@ -6,10 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.navigation.Screen.BreathingExerciseScreen
-import com.example.navigation.Screen.HomeScreen
-import com.example.navigation.Screen.MeditationDetailsScreen
-import com.example.navigation.Screen.SelectMeditationScreen
+import com.example.navigation.screen.BreathingExerciseScreen
+import com.example.navigation.screen.HomeScreen
+import com.example.navigation.screen.MeditationDetailsScreen
+import com.example.navigation.screen.SelectMeditationScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

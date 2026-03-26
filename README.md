@@ -7,17 +7,17 @@ Dette projekt er et Android‑app‑projekt udviklet i Kotlin med Jetpack Compos
 
 com.example.navigation app
 
-1 -- Componenets
+1 -- componenets
 
-2 -- Model
+2 -- model
 
-3 -- Navigation
+3 -- navigation
 
-4 -- Screen
+4 -- screen
 
-5 -- UI theme
+5 -- ui theme
 
-6 -- Viewmodel
+6 -- viewmodel
 
 MainActivity
 

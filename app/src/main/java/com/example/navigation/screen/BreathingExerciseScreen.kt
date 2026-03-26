@@ -1,4 +1,4 @@
-package com.example.navigation.Screen
+package com.example.navigation.screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button

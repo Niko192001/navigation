@@ -1,6 +1,4 @@
-package com.example.navigation.Screen
-
-
+package com.example.navigation.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -9,37 +7,44 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.graphics.Color
 
 @Composable
-fun MeditationDetailsScreen(
-    onReturnHomeClick: () -> Unit
+fun HomeScreen(
+    name: String,
+    onStartMeditationClick: () -> Unit
 ) {
     Column(modifier = Modifier.padding(16.dp)) {
         Text(
-            text = "Meditation Details",
-            fontSize = 24.sp
+            text = "Welcome, $name.",
+            fontSize = 28.sp
         )
-
         Text(
-            text = "Date: March 23, 2026",
-            fontSize = 18.sp,
-            modifier = Modifier.padding(top = 16.dp)
+            text = "Your daily calm awaits.",
+            fontSize = 18.sp
         )
-        Text("Duration: 10 Minutes")
-        Text("Type: Focus Meditation")
 
         Button(
-            onClick = onReturnHomeClick,
+            onClick = onStartMeditationClick,
             modifier = Modifier.padding(top = 16.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFFE77B7) // vores farve
             )
 
         ) {
-            Text("RETURN TO HOME")
+            Text("START MEDITATION")
         }
+
+        Text(
+            text = "Recent Sessions",
+            fontSize = 20.sp,
+            modifier = Modifier.padding(top = 24.dp)
+        )
+
+        Text("15 min • Oct 26 • Focus")
+        Text("10 min • Oct 25 • Sleep")
+        Text("20 min • Oct 24 • Calm")
     }
 }
