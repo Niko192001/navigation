@@ -1,29 +1,19 @@
 # navigation app
 
 com.example.navigation app
-│
-├── Main
-│   ├── screens
-│   │   ├── Home
-│   │   │   └── HomeScreen.kt
-│   │   ├── Select
-│   │   │   └── SelectMeditationScreen.kt
-│   │   ├── Details
-│   │   │   └── MeditationDetailsScreen.kt
-│   │   └── Breathing
-│   │       └── BreathingExerciseScreen.kt
-│   │
-│   └── Components
-│       └── CustomButton.kt
-│
-├── Viewmodel
-│   └── MeditationViewModel.kt
-│
-├── Model
-│   └── Meditation.kt
-│
-└── Navigation
-└── NavGraph.kt
 
+1 -- Componenets
+
+2-- Model
+
+3-- Navigation
+
+4-- Screen
+
+5-- UI theme
+
+6--Viewmodel
+
+MainActivity
 
 
