@@ -22,8 +22,11 @@ NavGraph.kt
 4 -- screen ⬇️
 
 HomeScreen.kt
+
 BreathingExerciseScreen.kt
+
 MeditationDetailsScreen.kt
+
 SelectMeditationScreen.kt
 
 5 -- ui theme ⬇️
