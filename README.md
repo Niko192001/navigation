@@ -7,17 +7,34 @@ Dette projekt er et Android‑app‑projekt udviklet i Kotlin med Jetpack Compos
 
 com.example.navigation app
 
-1 -- componenets
+1 -- componenets ⬇️
 
-2 -- model
+CustomButton.kt
 
-3 -- navigation
+2 -- model ⬇️
 
-4 -- screen
+Meditation.kt
 
-5 -- ui theme
+3 -- navigation ⬇️
 
-6 -- viewmodel
+NavGraph.kt
+
+4 -- screen ⬇️
+
+HomeScreen.kt
+BreathingExerciseScreen.kt
+MeditationDetailsScreen.kt
+SelectMeditationScreen.kt
+
+5 -- ui theme ⬇️
+
+Color.kt
+Theme.kt
+Type.kt
+
+6 -- viewmodel ⬇️
+
+MeditationViewModel.kt
 
 MainActivity
 
