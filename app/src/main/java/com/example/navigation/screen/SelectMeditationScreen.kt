@@ -22,12 +22,11 @@ fun SelectMeditationScreen(
             fontSize = 24.sp
         )
 
-        Text("Focus", modifier = Modifier.padding(top = 16.dp))
-        Text("Sleep")
-        Text("Calm")
+        Text("Pursed lip breathing", modifier = Modifier.padding(top = 16.dp))
+
 
         Text(
-            text = "Time: 10:00",
+            text = "Time: Custom",
             fontSize = 18.sp,
             modifier = Modifier.padding(top = 16.dp)
         )
