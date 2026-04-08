@@ -23,6 +23,9 @@ fun SelectMeditationScreen(
         )
 
         Text("Pursed lip breathing", modifier = Modifier.padding(top = 16.dp))
+        Text("Box breathing", modifier = Modifier.padding(top = 16.dp))
+        Text("Belly breathing", modifier = Modifier.padding(top = 16.dp))
+
 
 
         Text(

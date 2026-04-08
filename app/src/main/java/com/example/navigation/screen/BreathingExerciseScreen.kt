@@ -2,6 +2,7 @@ package com.example.navigation.screen
 
 import android.text.Layout
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,11 +38,18 @@ fun BreathingExerciseScreen(
     var selectedDuration by remember { mutableStateOf(180) } // 180 = 3 min
     var timeLeft by remember { mutableStateOf(selectedDuration) }
     var isRunning by remember { mutableStateOf(false) }
+    var showFinishScreen by remember { mutableStateOf(false) }
+
     LaunchedEffect(isRunning, timeLeft) {
         if (isRunning && timeLeft > 0) {
             delay(1000)
             timeLeft--
         }
+        if (timeLeft == 0 && isRunning) {
+            isRunning = false
+            showFinishScreen = true
+        }
+
     }
     @Composable
     fun BackButton(onBackClick: () -> Unit) {
@@ -50,6 +59,48 @@ fun BreathingExerciseScreen(
                 contentDescription = "Back"
             )
         }
+    }
+    if (showFinishScreen) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0xAA000000)), // Semi transperant overlay
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .background(Color.White, shape = CircleShape)
+                    .padding(40.dp)
+            ) {
+                Text(
+                    text = "Well done!",
+                    fontSize = 32.sp,
+                    color = Color(0xFFFE77B7)
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text(
+                    text = "You have completed ${selectedDuration / 60} minutes",
+                    fontSize = 20.sp
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Button(
+                    onClick = {
+                        showFinishScreen = false
+                        timeLeft = selectedDuration
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFFE77B7)
+                    )
+                ) {
+                    Text("Close", fontSize = 18.sp)
+                }
+            }
+        }
+        return
     }
     Column(
         modifier = Modifier.padding(16.dp),
@@ -87,9 +138,9 @@ fun BreathingExerciseScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         // Illustrations (placeholder text)
-        Text("👃  Inhale through your nose", fontSize = 20.sp)
+        Text("👃  Inhale through your nose", fontSize = 28.sp)
         Spacer(modifier = Modifier.height(20.dp))
-        Text("👄  Exhale through pursed lips", fontSize = 20.sp)
+        Text("👄  Exhale through pursed lips", fontSize = 28.sp)
 
         Spacer(modifier = Modifier.height(32.dp))
 
@@ -98,23 +149,28 @@ fun BreathingExerciseScreen(
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             durations.forEach { duration ->
-                Button(
-                    onClick = {
-                        selectedDuration = duration
-                        timeLeft = duration
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (selectedDuration == duration)
-                            Color(0xFFFE77B7)
-                        else
-                            Color.LightGray
+                Box(
+                    modifier = Modifier
+                        .background(
+                            if (selectedDuration == duration) Color(0xFFFE77B7) else Color.LightGray,
+                            shape = CircleShape
+                        )
+                        .padding(horizontal = 20.dp, vertical = 10.dp)
+                        .clickable {
+                            selectedDuration = duration
+                            timeLeft = duration
+                        }
+                )
+                {
+                    Text(
+                        text = "${duration / 60} min",
+                        color = Color.White,
+                        fontSize = 16.sp
                     )
-                ) {
-                    Text("${duration / 60} min")
                 }
             }
         }
-
+        Spacer(modifier = Modifier.height(20.dp))
         // Timer
         Text(
             text = "${timeLeft / 60}:${(timeLeft % 60).toString().padStart(2, '0')}",
@@ -145,5 +201,22 @@ fun BreathingExerciseScreen(
             Text(if (isRunning) "Stop exercise" else "Start exercise", fontSize = 20.sp)
         }
 
+        Spacer(modifier = Modifier.height(12.dp))
+
+        //Nulstil button
+        Button(
+            onClick = {
+                isRunning = false
+                timeLeft = selectedDuration
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.LightGray
+            )
+        ) {
+            Text("Nulstil tiden", fontSize = 18.sp)
+        }
     }
 }

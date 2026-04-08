@@ -43,8 +43,8 @@ fun HomeScreen(
             modifier = Modifier.padding(top = 24.dp)
         )
 
-        Text("15 min • Oct 26 • Focus")
-        Text("10 min • Oct 25 • Sleep")
-        Text("20 min • Oct 24 • Calm")
+        Text("12 min • Oct 10 • Pursed lip breathing")
+        Text("6 min • Oct 15 • Belly breathing")
+        Text("9 min • Oct 30 • Box breathing")
     }
 }
