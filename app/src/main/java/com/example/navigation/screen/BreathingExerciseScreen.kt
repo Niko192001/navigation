@@ -26,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.example.navigation.components.HeartShape
 import kotlinx.coroutines.delay
 
 
@@ -70,7 +71,7 @@ fun BreathingExerciseScreen(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .background(Color.White, shape = CircleShape)
+                    .background(Color.White, shape = HeartShape)
                     .padding(40.dp)
             ) {
                 Text(
