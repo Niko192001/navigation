@@ -72,24 +72,24 @@ fun BreathingExerciseScreen(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .size(260.dp) // Fast størrelse, så hjertet er stabilt
+                    .size(360.dp) // Fast størrelse, så hjertet er stabilt
                     .clip(HeartShape) // Klip indholdet, efter hjerte formen
                     .background(Color.White, shape = HeartShape)
-                    .padding(40.dp)
+                    .padding(top = 60.dp, bottom = 40.dp, start = 24.dp, end = 24.dp)
             ) {
                 Text(
                     text = "Well done!",
-                    fontSize = 32.sp,
+                    fontSize = 28.sp,
                     color = Color(0xFFFE77B7)
                 )
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
                     text = "You have completed ${selectedDuration / 60} minutes",
-                    fontSize = 20.sp
+                    fontSize = 18.sp
                 )
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Button(
                     onClick = {
@@ -100,7 +100,7 @@ fun BreathingExerciseScreen(
                         containerColor = Color(0xFFFE77B7)
                     )
                 ) {
-                    Text("Close", fontSize = 18.sp)
+                    Text("Close", fontSize = 16.sp)
                 }
             }
         }
