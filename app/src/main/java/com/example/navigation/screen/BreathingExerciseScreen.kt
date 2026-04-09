@@ -26,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
 import com.example.navigation.components.HeartShape
 import kotlinx.coroutines.delay
 
@@ -71,6 +72,8 @@ fun BreathingExerciseScreen(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
+                    .size(260.dp) // Fast størrelse, så hjertet er stabilt
+                    .clip(HeartShape) // Klip indholdet, efter hjerte formen
                     .background(Color.White, shape = HeartShape)
                     .padding(40.dp)
             ) {
