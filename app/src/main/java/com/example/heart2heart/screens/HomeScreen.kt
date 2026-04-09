@@ -116,8 +116,8 @@ fun HomeScreen() {
         ) {
             NavItem(R.drawable.connecthearticon, "Connect", pink)
             NavItem(R.drawable.homeicon, "Home", pink)
-            NavItem(R.drawable.breathe, "Breathe", pink)
             NavItem(R.drawable.contactsicon, "Contacts", pink)
+            NavItem(R.drawable.breathe, "Breathe", pink)
         }
     }
 }
