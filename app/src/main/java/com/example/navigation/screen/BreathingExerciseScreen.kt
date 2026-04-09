@@ -3,6 +3,7 @@ package com.example.navigation.screen
 import android.text.Layout
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -23,6 +24,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -30,15 +32,14 @@ import androidx.compose.ui.draw.clip
 import com.example.navigation.components.HeartShape
 import kotlinx.coroutines.delay
 
-
 @Composable
 fun BreathingExerciseScreen(
     onBackClick: () -> Unit,
     onStartExerciseClick: () -> Unit
 ) {
-    val durations = listOf(180, 360, 540, 720)
-    var selectedDuration by remember { mutableStateOf(180) } // 180 = 3 min
-    var timeLeft by remember { mutableStateOf(selectedDuration) }
+    val durations = listOf(10, 180, 360, 540)
+    var selectedDuration by remember { mutableIntStateOf(180) } // 180 = 3 min
+    var timeLeft by remember { mutableIntStateOf(selectedDuration) }
     var isRunning by remember { mutableStateOf(false) }
     var showFinishScreen by remember { mutableStateOf(false) }
 
@@ -58,7 +59,8 @@ fun BreathingExerciseScreen(
         IconButton(onClick = onBackClick) {
             Icon(
                 painter = painterResource(id = R.drawable.arrowicon),
-                contentDescription = "Back"
+                contentDescription = "Back",
+                tint = Color.Black
             )
         }
     }
@@ -66,16 +68,22 @@ fun BreathingExerciseScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xAA000000)), // Semi transperant overlay
+                .background(Color(0xAA000000)), // Semi transparent overlay
             contentAlignment = Alignment.Center
         ) {
+
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .size(360.dp) // Fast størrelse, så hjertet er stabilt
                     .clip(HeartShape) // Klip indholdet, efter hjerte formen
                     .background(Color.White, shape = HeartShape)
-                    .padding(top = 60.dp, bottom = 40.dp, start = 24.dp, end = 24.dp)
+                    .padding(
+                        top = 90.dp,
+                        bottom = 40.dp,
+                        start = 24.dp,
+                        end = 24.dp
+                    )
             ) {
                 Text(
                     text = "Well done!",
@@ -85,7 +93,10 @@ fun BreathingExerciseScreen(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "You have completed ${selectedDuration / 60} minutes",
+                    text = if (selectedDuration < 60)
+                        "You have completed $selectedDuration seconds"
+                    else
+                        "You have completed ${selectedDuration / 60} minutes",
                     fontSize = 18.sp
                 )
 
@@ -160,14 +171,17 @@ fun BreathingExerciseScreen(
                             shape = CircleShape
                         )
                         .padding(horizontal = 20.dp, vertical = 10.dp)
-                        .clickable {
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null
+                        ) {
                             selectedDuration = duration
                             timeLeft = duration
                         }
                 )
                 {
                     Text(
-                        text = "${duration / 60} min",
+                        text = if (duration < 60) "${duration} sec" else "${duration / 60} min",
                         color = Color.White,
                         fontSize = 16.sp
                     )
@@ -202,7 +216,7 @@ fun BreathingExerciseScreen(
                 containerColor = Color(0xFFFE77B7) // din pink farve
             )
         ) {
-            Text(if (isRunning) "Stop exercise" else "Start exercise", fontSize = 20.sp)
+            Text(if (isRunning) "Stop" else "Start", fontSize = 20.sp)
         }
 
         Spacer(modifier = Modifier.height(12.dp))
@@ -220,7 +234,7 @@ fun BreathingExerciseScreen(
                 containerColor = Color.LightGray
             )
         ) {
-            Text("Nulstil tiden", fontSize = 18.sp)
+            Text("Nulstil", fontSize = 18.sp)
         }
     }
 }
