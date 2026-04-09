@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.heart2heart.screens.BellyBreathingScreen
+import com.example.heart2heart.screens.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +33,15 @@ class MainActivity : ComponentActivity() {
             ) {
 
                 composable("Belly Breathing Screen") {
-                    BellyBreathingScreen { }
+                    BellyBreathingScreen(
+                        onBackClick = {
+                            navController.navigate("Home Screen")
+                        }
+                    )
+                }
 
+                composable ("Home Screen"){
+                    HomeScreen()
                 }
             }
         }
