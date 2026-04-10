@@ -5,15 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.runtime.Composable
-import androidx.compose.material3.Text
-import androidx.compose.ui.unit.sp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -24,24 +24,24 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             val navController = rememberNavController()
 
             NavHost(
                 navController = navController,
-                startDestination = "Belly Breathing Screen"
+                startDestination = "home"
             ) {
-
-                composable("Belly Breathing Screen") {
-                    BellyBreathingScreen(
-                        onBackClick = {
-                            navController.navigate("Home Screen")
-                        }
-                    )
+                composable("home") {
+                    HomeScreen(navController)
                 }
 
-                composable ("Home Screen"){
-                    HomeScreen()
+                composable("breathe") {
+                    BellyBreathingScreen(
+                        onBackClick = {
+                            navController.popBackStack()
+                        }
+                    )
                 }
             }
         }

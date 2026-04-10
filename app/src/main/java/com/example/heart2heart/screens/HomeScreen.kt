@@ -2,6 +2,7 @@ package com.example.heart2heart.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -16,10 +17,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.heart2heart.R
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     val pink = Color(0xFFF47DBB)
     val gray = Color(0xFF8E8E8E)
     val bg = Color(0xFFF5F5F5)
@@ -90,7 +92,9 @@ fun HomeScreen() {
         Button(
             onClick = {},
             colors = ButtonDefaults.buttonColors(containerColor = pink),
-            modifier = Modifier.width(220.dp).height(52.dp)
+            modifier = Modifier
+                .width(220.dp)
+                .height(52.dp)
         ) {
             Text("Activate vibration", color = Color.White)
         }
@@ -100,7 +104,9 @@ fun HomeScreen() {
         Button(
             onClick = {},
             colors = ButtonDefaults.buttonColors(containerColor = pink),
-            modifier = Modifier.width(220.dp).height(52.dp)
+            modifier = Modifier
+                .width(220.dp)
+                .height(52.dp)
         ) {
             Text("Stop vibration", color = Color.White)
         }
@@ -114,17 +120,29 @@ fun HomeScreen() {
                 .padding(vertical = 10.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            NavItem(R.drawable.connecthearticon, "Connect", pink)
-            NavItem(R.drawable.homeicon, "Home", pink)
-            NavItem(R.drawable.contactsicon, "Contacts", pink)
-            NavItem(R.drawable.breathe, "Breathe", pink)
+            NavItem(R.drawable.connecthearticon, "Connect", pink) { }
+            NavItem(R.drawable.homeicon, "Home", pink) { }
+            NavItem(R.drawable.breathe, "Breathe", pink) {
+                navController.navigate("breathe") {
+                    launchSingleTop = true
+                }
+            }
+            NavItem(R.drawable.contactsicon, "Contacts", pink) { }
         }
     }
 }
 
 @Composable
-fun NavItem(icon: Int, label: String, color: Color) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+fun NavItem(
+    icon: Int,
+    label: String,
+    color: Color,
+    onClick: () -> Unit
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.clickable { onClick() }
+    ) {
         Image(
             painter = painterResource(icon),
             contentDescription = label,
